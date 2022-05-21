@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.coup.gui.GameSceneController">
+   <children>
+      <ListView fx:id="actionsListView" layoutX="27.0" layoutY="75.0" prefHeight="270.0" prefWidth="398.0" />
+      <Label layoutX="27.0" layoutY="57.0" text="Actions:" />
+      <Label layoutX="442.0" layoutY="14.0" text="Desk : " />
+      <ImageView fitHeight="169.0" fitWidth="287.0" layoutX="979.0" layoutY="75.0">
+         <image>
+            <Image url="@images/GuideCard.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="976.0" layoutY="48.0" text="Guide Card : " />
+      <Label layoutX="32.0" layoutY="360.0" text="You:" />
+      <ImageView fx:id="yourCoin6" layoutX="33.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin7" layoutX="83.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin8" layoutX="133.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin9" layoutX="183.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin10" layoutX="233.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin1" layoutX="33.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin2" layoutX="83.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin3" layoutX="133.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin4" layoutX="183.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yourCoin5" layoutX="233.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="459.0" layoutY="360.0" text="First bot:" />
+      <ImageView fx:id="firstBotsCoin6" layoutX="460.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin7" layoutX="510.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin8" layoutX="560.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin9" layoutX="610.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin10" layoutX="660.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin1" layoutX="460.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin2" layoutX="510.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin3" layoutX="560.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin4" layoutX="610.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstBotsCoin5" layoutX="660.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="733.0" layoutY="360.0" text="Second bot:" />
+      <ImageView fx:id="secondBotsCoin6" layoutX="734.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin7" layoutX="784.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin8" layoutX="834.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin9" layoutX="884.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin10" layoutX="934.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin1" layoutX="734.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin2" layoutX="784.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin3" layoutX="834.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin4" layoutX="884.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondBotsCoin5" layoutX="934.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1009.0" layoutY="360.0" text="Third Bot:" />
+      <ImageView fx:id="thirdBotsCoin6" layoutX="1010.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin7" layoutX="1060.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin8" layoutX="1110.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin9" layoutX="1160.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin10" layoutX="1210.0" layoutY="638.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin1" layoutX="1010.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin2" layoutX="1060.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin3" layoutX="1110.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin4" layoutX="1160.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdBotsCoin5" layoutX="1210.0" layoutY="588.0">
+         <image>
+            <Image url="@images/Coin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="301.0" layoutY="378.0" text="Choose action:" />
+      <ChoiceBox fx:id="actionChoiceBox" layoutX="301.0" layoutY="405.0" prefWidth="150.0" />
+<!--      <Button fx:id="performActionButton" layoutX="301.0" layoutY="502.0" mnemonicParsing="false" onAction="#performAction" text="Perform" />-->
+<!--      <Button fx:id="challengeAttackerButton" layoutX="319.0" layoutY="588.0" mnemonicParsing="false" onAction="#challengeAttacker" text="Challenge attacker" />-->
+<!--      <Button fx:id="confrontButton" layoutX="287.0" layoutY="552.0" mnemonicParsing="false" onAction="#confront" text="Confront" />-->
+      <Label layoutX="301.0" layoutY="440.0" text="Choose opponent:" />
+      <ChoiceBox fx:id="opponentChoiceBox" layoutX="301.0" layoutY="465.0" prefWidth="150.0" />
+      <Line endX="88.79998779296875" layoutX="364.0" layoutY="537.0" startX="-61.5999755859375" />
+<!--      <Button fx:id="challengeDefenderButton" layoutX="316.0" layoutY="625.0" mnemonicParsing="false" onAction="#challengeDefender" text="Challenge defender" />-->
+<!--      <Button fx:id="doNothingButton" layoutX="360.0" layoutY="552.0" mnemonicParsing="false" onAction="#doNothing" text="Don't Confront" />-->
+<!--      <Button fx:id="nextRoundButton" layoutX="338.0" layoutY="663.0" mnemonicParsing="false" onAction="#performRound" text="Next round" />-->
+      <GridPane fx:id="DeskCards" layoutX="442.0" layoutY="57.0" prefHeight="287.0" prefWidth="500.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="84.4" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="157.80001525878907" minHeight="0.0" prefHeight="110.39999999999999" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="177.4" minHeight="10.0" prefHeight="92.40000000000003" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="HumanCard" layoutX="48.0" layoutY="382.0" prefHeight="200.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="FirstBotGrid" layoutX="469.0" layoutY="384.0" prefHeight="189.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="SecondBotGrid" layoutX="709.0" layoutY="385.0" prefHeight="190.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="ThirdBotGrid" layoutX="960.0" layoutY="386.0" prefHeight="190.0" prefWidth="200.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
