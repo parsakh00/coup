@@ -15,15 +15,23 @@ public class Player {
     protected String name;
     protected int coin;
 
+    protected String botNumber; //if isHuman == true put "user"
+
     int card1;
     int card2;
     public boolean isHuman;
 
-    public Player(String name) {
+    public Player(String name, String botNumber) {
         this.name = name;
         hand = new ArrayList<>();
         lostCards = new ArrayList<>();
+        this.botNumber = botNumber;
+
         coin = 0;
+    }
+
+    public String getBotNumber() {
+        return botNumber;
     }
 
     public void setCard1(int card1) {
@@ -209,6 +217,7 @@ public class Player {
         jsonObject.put("Coin", player.getCoin() + i);
         jsonObject.put("isHuman", player.isHuman());
         jsonObject.put("Type", player.isHuman());
+        jsonObject.put("BotNumber", player.getBotNumber());
         try {
             FileWriter file = new FileWriter(System.getProperty("user.dir") + "\\src\\main\\java\\example\\coup\\database\\" + player.getName() + ".json");
             file.write(jsonObject.toJSONString());

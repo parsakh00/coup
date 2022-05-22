@@ -9,7 +9,7 @@ public class Human extends Player{
 
 
     public Human(String name) {
-        super(name);
+        super(name,"");
     }
     public boolean sendChallenge(Challenge challenge){
         System.out.println("Do you wanna Challenge?Y/N");

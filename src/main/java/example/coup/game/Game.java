@@ -10,13 +10,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Game {
 
     public Player[] player;
-    ArrayList<String> desk;
+    public ArrayList<String> desk;
     public int turn;
     public int coin;
+
+    public Player user;
+    public Player firstBot;
+    public Player secondBot;
+    public Player thirdBot;
 
     public Game(Player player1, Player player2, Player player3, Player player4) {
         turn = 0;
@@ -55,10 +61,20 @@ public class Game {
             this.coin -= 2;
             MakeUserFile(player[i].getCardFromHand(), player[i]);
         }
+
+        for (int i = 0; i < 4; i++){
+            if (Objects.equals(player[i].getBotNumber(), "FirstBot")) firstBot = player[i];
+            else if (Objects.equals(player[i].getBotNumber(), "SecondBot")) secondBot = player[i];
+            else if (Objects.equals(player[i].getBotNumber(), "ThirdBot")) thirdBot = player[i];
+            else if (Objects.equals(player[i].getBotNumber(), "user")) user = player[i];
+        }
+
+
     }
 
-
-
+    public Player[] getPlayer() {
+        return player;
+    }
 
     public void addToDesk(String card){
         desk.add(card);
@@ -75,6 +91,7 @@ public class Game {
         jsonObject.put("Cards", hand);
         jsonObject.put("Coin", player.getCoin());
         jsonObject.put("isHuman", player.isHuman());
+        jsonObject.put("Name", player.getName());
         try {
             FileWriter file = new FileWriter(System.getProperty("user.dir") + "\\src\\main\\java\\example\\coup\\database\\" + player.getName() + ".json");
             file.write(jsonObject.toJSONString());

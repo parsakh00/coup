@@ -46,11 +46,11 @@ public class GameConfig {
             System.out.println("Name : ");
             name2 = scanner.next();
         }
-        if (name == 1) player = new Player(name2);
-        else if (name == 2) player = new Player("Greedy");
-        else if (name == 3) player = new Player("Paranoid");
-        else if (name == 4) player = new Player("CoupDetat");
-        else if (name == 5) player = new Player("CautiousKiller");
+        if (name == 1) player = new Player(name2,"user");
+        else if (name == 2) player = new Player("Greedy","FirstBot");
+        else if (name == 3) player = new Player("Paranoid","SecondBot");
+        else if (name == 4) player = new Player("CoupDetat","ThirdBot");
+        else if (name == 5) player = new Player("CautiousKiller","FourthBot");
         player.isHuman = isHuman == 1;
         System.out.println("Choose two cards from desk : ");
         System.out.println(getDeskFile());

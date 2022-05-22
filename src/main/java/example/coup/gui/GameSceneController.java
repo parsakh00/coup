@@ -2,208 +2,313 @@ package example.coup.gui;
 
 import example.coup.HelloApplication;
 import example.coup.game.Game;
+import example.coup.model.Action;
 import example.coup.model.Player;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameSceneController {
 
     public ListView actionsListView;
+    public ChoiceBox<Action> actionChoiceBox;
+    public ChoiceBox<String> challengeChoiceBox;
 
-    public ImageView yourCoin6;
-    public ImageView yourCoin7;
-    public ImageView yourCoin8;
-    public ImageView yourCoin9;
-    public ImageView yourCoin10;
-    public ImageView yourCoin1;
-    public ImageView yourCoin2;
-    public ImageView yourCoin3;
-    public ImageView yourCoin4;
-    public ImageView yourCoin5;
-    public ImageView firstBotsCoin6;
-    public ImageView firstBotsCoin7;
-    public ImageView firstBotsCoin8;
-    public ImageView firstBotsCoin9;
-    public ImageView firstBotsCoin10;
-    public ImageView firstBotsCoin1;
-    public ImageView firstBotsCoin2;
-    public ImageView firstBotsCoin3;
-    public ImageView firstBotsCoin4;
-    public ImageView firstBotsCoin5;
-    public ImageView secondBotsCoin6;
-    public ImageView secondBotsCoin7;
-    public ImageView secondBotsCoin8;
-    public ImageView secondBotsCoin9;
-    public ImageView secondBotsCoin10;
-    public ImageView secondBotsCoin1;
-    public ImageView secondBotsCoin2;
-    public ImageView secondBotsCoin3;
-    public ImageView secondBotsCoin4;
-    public ImageView secondBotsCoin5;
-    public ImageView thirdBotsCoin6;
-    public ImageView thirdBotsCoin7;
-    public ImageView thirdBotsCoin8;
-    public ImageView thirdBotsCoin9;
-    public ImageView thirdBotsCoin10;
-    public ImageView thirdBotsCoin1;
-    public ImageView thirdBotsCoin2;
-    public ImageView thirdBotsCoin3;
-    public ImageView thirdBotsCoin4;
-    public ImageView thirdBotsCoin5;
-    public ChoiceBox actionChoiceBox;
-    public Button performActionButton;
-    public Button challengeAttackerButton;
-    public Button confrontButton;
-    public ChoiceBox opponentChoiceBox;
-    public Button challengeDefenderButton;
-    public Button doNothingButton;
-    public Button nextRoundButton;
+    private final Action[] ACTION_LIST = {Action.Income,Action.ForeignAid,Action.Coup
+            ,Action.Taxes,Action.Assassinate,Action.Steal,Action.SwapInfluence};
+    private final ObservableList<Action> ACTION = FXCollections.observableArrayList(ACTION_LIST);
+
+    private final String[] CHALLENGE_LIST = {"No Challenge","FirstBot","SecondBot","ThirdBot"};
+    private final ObservableList<String> CHALLENGE = FXCollections.observableArrayList(CHALLENGE_LIST);
+
+
     public GridPane DeskCards;
     public GridPane HumanCard;
     public GridPane FirstBotGrid;
     public GridPane SecondBotGrid;
     public GridPane ThirdBotGrid;
+    public ImageView userCoin;
+    public ImageView firstBotCoin;
+    public ImageView secondBotCoin;
+    public ImageView thirdBotCoin;
+    public Label userCoins;
+    public Label firstBotCoins;
+    public Label thirdBotCoins;
+    public Label secondBotCoins;
+    public Label gameCoin;
+    public Button nextRound;
+    public Button okAction;
+    public Button okChallenge;
+
+    int eachCardNumber;
     Image Ambassador1 = new Image(String.valueOf(HelloApplication.class.getResource("Ambassador.png")));
-//    Image Ambassador2 = new Image(String.valueOf(HelloApplication.class.getResource("Ambassador.png")));
-//    Image Ambassador3 = new Image(String.valueOf(HelloApplication.class.getResource("Ambassador.png")));
     Image Assassin1 = new Image(String.valueOf(HelloApplication.class.getResource("Assassin.png")));
-//    Image Assassin2 = new Image(String.valueOf(HelloApplication.class.getResource("Assassin.png")));
-//    Image Assassin3 = new Image(String.valueOf(HelloApplication.class.getResource("Assassin.png")));
     Image Captain1 = new Image(String.valueOf(HelloApplication.class.getResource("Captain.png")));
-//    Image Captain2 = new Image(String.valueOf(HelloApplication.class.getResource("Captain.png")));
-//    Image Captain3 = new Image(String.valueOf(HelloApplication.class.getResource("Captain.png")));
     Image Duke1 = new Image(String.valueOf(HelloApplication.class.getResource("Duke.png")));
-//    Image Duke2 = new Image(String.valueOf(HelloApplication.class.getResource("Duke.png")));
-//    Image Duke3 = new Image(String.valueOf(HelloApplication.class.getResource("Duke.png")));
     Image Countess1 = new Image(String.valueOf(HelloApplication.class.getResource("Contessa.png")));
-//    Image Countess2 = new Image(String.valueOf(HelloApplication.class.getResource("Contessa.png")));
-//    Image Countess3 = new Image(String.valueOf(HelloApplication.class.getResource("Contessa.png")));
-
     Game game;
-    Player player1 = new Player("Parsa");
-    Player player2 = new Player("Paranoid");
-    Player player3 = new Player("CautiousKiller");
-    Player player4 = new Player("Greedy");
+    int cnt;
+    Player player1 = new Player("Parsa","user");
+    Player player2 = new Player("Paranoid","FirstBot");
+    Player player3 = new Player("CautiousKiller","SecondBot");
+    Player player4 = new Player("Greedy","ThirdBot");
 
-
+//    ArrayList<String> userCards;
+//    userCards = new ArrayList<>();
+//    desk = (ArrayList<String>) getDeskFile();
 
     public void initialize(){
         game = new Game(player1, player2, player3, player4);
         game.start();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 3; j++) {
-                Pane pane = new Pane();
-                pane.setId(String.valueOf(10 * j + i));
-                pane.getStyleClass().removeAll();
-                
-                if(i == 0){
-                    ImageView imageView = new ImageView(Ambassador1);
-                    imageView.setFitHeight(50);
-                    imageView.setFitWidth(50);
-                    pane.getChildren().add(imageView);
-                }
-//                else if(i == 0 && j == 1){
-//                    ImageView imageView = new ImageView(Ambassador2);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-//                else if(i == 0 && j == 2){
-//                    ImageView imageView = new ImageView(Ambassador3);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-                else if(i == 1){
-                    ImageView imageView = new ImageView(Assassin1);
-                    imageView.setFitHeight(50);
-                    imageView.setFitWidth(50);
-                    pane.getChildren().add(imageView);
-                }
-//                else if(i == 1 && j == 1){
-//                    ImageView imageView = new ImageView(Assassin2);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-//                else if(i == 1 && j == 2){
-//                    ImageView imageView = new ImageView(Assassin3);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-                else if(i == 2){
-                    ImageView imageView = new ImageView(Countess1);
-                    imageView.setFitHeight(50);
-                    imageView.setFitWidth(50);
-                    pane.getChildren().add(imageView);
-                }
-//                else if(i == 2 && j == 1){
-//                    ImageView imageView = new ImageView(Countess2);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-//                else if(i == 2 && j == 2){
-//                    ImageView imageView = new ImageView(Countess3);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-                else if(i == 3){
-                    ImageView imageView = new ImageView(Captain1);
-                    imageView.setFitHeight(50);
-                    imageView.setFitWidth(50);
-                    pane.getChildren().add(imageView);
-                }
-//                else if(i == 3 && j == 1){
-//                    ImageView imageView = new ImageView(Captain2);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-//                else if(i == 3 && j == 2){
-//                    ImageView imageView = new ImageView(Captain3);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-                else if(i == 4){
-                    ImageView imageView = new ImageView(Duke1);
-                    imageView.setFitHeight(50);
-                    imageView.setFitWidth(50);
-                    pane.getChildren().add(imageView);
-                }
-//                else if(i == 4 && j == 1){
-//                    ImageView imageView = new ImageView(Duke2);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-//                else if(i == 4 && j == 2){
-//                    ImageView imageView = new ImageView(Duke3);
-//                    imageView.setFitHeight(50);
-//                    imageView.setFitWidth(50);
-//                    pane.getChildren().add(imageView);
-//                }
-                
-                
-                
-            }
-        }
 
+        arrangeDesk();
+        arrangeHands();
+        putUsersCoin();
+        putGameCoin();
 
-
-
-
-
-
+        actionChoiceBox.setItems(ACTION);
+        challengeChoiceBox.setItems(CHALLENGE);
 
 
     }
+
+    public Player getUserPlayer(){
+        for (int i = 0; i < 4; i++){
+            if (Objects.equals(game.player[i].getBotNumber(), "user")) return game.player[i];
+        }
+        return null;
+    }
+
+    public void challengeBtn(ActionEvent actionEvent){
+        //ToDO
+    }
+    public void actionBtn(ActionEvent actionEvent){
+        if(actionChoiceBox.getSelectionModel().getSelectedItem() == Action.Income) getUserPlayer().addCoin(1);
+        //ToDo
+    }
+    public void nextRoundBtn(ActionEvent actionEvent){
+        //ToDo
+    }
+
+    public void putUsersCoin(){
+        for (int i = 0; i < 4; i++){
+            String botNumber = getUserBotNumberFile(game.player[i]);
+            int usersCoin = getUserCoinFromFile(game.player[i]);
+            switch (botNumber) {
+                case "FirstBot" -> firstBotCoins.setText(Integer.toString(usersCoin));
+                case "SecondBot" -> secondBotCoins.setText(Integer.toString(usersCoin));
+                case "ThirdBot" -> thirdBotCoins.setText(Integer.toString(usersCoin));
+                default -> userCoins.setText(Integer.toString(usersCoin));
+            }
+        }
+    }
+    public void putGameCoin(){
+        gameCoin.setText(Integer.toString(game.coin));
+    }
+    public void arrangeHands(){
+        //for each player hand
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < 2; i++) {
+                Pane pane = new Pane();
+                pane.setId(String.valueOf(i));
+                pane.getStyleClass().removeAll();
+                //String userName = getUserNameFromFile(game.player[j]);
+                String botNumber = getUserBotNumberFile(game.player[j]);
+                String handCardName = getUserCardsFromFile(game.player[j], i);
+                switch (botNumber) {
+                    case "FirstBot" -> {
+                        pane.getChildren().add(getImageOfCard(handCardName));
+                        FirstBotGrid.add(pane, i, 0, 1, 1);
+                    }
+                    case "SecondBot" -> {
+                        pane.getChildren().add(getImageOfCard(handCardName));
+                        SecondBotGrid.add(pane, i, 0, 1, 1);
+                    }
+                    case "ThirdBot" -> {
+                        pane.getChildren().add(getImageOfCard(handCardName));
+                        ThirdBotGrid.add(pane, i, 0, 1, 1);
+                    }
+                    default -> {
+                        pane.getChildren().add(getImageOfCard(handCardName));
+                        HumanCard.add(pane, i, 0, 1, 1);
+                    }
+                }
+            }
+        }
+    }
+
+    public void arrangeDesk(){
+        for (int i = 0; i < 5; i++) {
+            if(i == 0){
+                cnt = numberOfEachCardInDesk(game.desk, "Ambassador");
+                for (int j = 0; j < 3; j++) {
+                    if (cnt > 0) {
+                        Pane pane = new Pane();
+                        pane.setId(String.valueOf(10 * j + i));
+                        pane.getStyleClass().removeAll();
+                        pane.getChildren().add(getImageOfCard("Ambassador"));
+                        DeskCards.add(pane, i, j, 1, 1);
+                    }
+                    cnt -= 1;
+                }
+            }
+            else if(i == 1){
+                for (int j = 0; j < 3; j++) {
+                    if (cnt > 0) {
+                        Pane pane = new Pane();
+                        pane.setId(String.valueOf(10 * j + i));
+                        pane.getStyleClass().removeAll();
+                        pane.getChildren().add(getImageOfCard("Assassin"));
+                        DeskCards.add(pane, i, j, 1, 1);
+                    }
+                    cnt -= 1;
+                }
+            }
+            else if(i == 2){
+                for (int j = 0; j < 3; j++) {
+                    if (cnt > 0) {
+                        Pane pane = new Pane();
+                        pane.setId(String.valueOf(10 * j + i));
+                        pane.getStyleClass().removeAll();
+                        pane.getChildren().add(getImageOfCard("Countess"));
+                        DeskCards.add(pane, i, j, 1, 1);
+                    }
+                    cnt -= 1;
+                }
+            }
+            else if(i == 3){
+                for (int j = 0; j < 3; j++) {
+                    if (cnt > 0) {
+                        Pane pane = new Pane();
+                        pane.setId(String.valueOf(10 * j + i));
+                        pane.getStyleClass().removeAll();
+                        pane.getChildren().add(getImageOfCard("Captain"));
+                        DeskCards.add(pane, i, j, 1, 1);
+                    }
+                    cnt -= 1;
+                }
+            }
+            else {
+                for (int j = 0; j < 3; j++) {
+                    if (cnt > 0) {
+                        Pane pane = new Pane();
+                        pane.setId(String.valueOf(10 * j + i));
+                        pane.getStyleClass().removeAll();
+                        pane.getChildren().add(getImageOfCard("Duke"));
+                        DeskCards.add(pane, i, j, 1, 1);
+                    }
+                    cnt -= 1;
+                }
+            }
+
+        }
+    }
+    public ImageView getImageOfCard(String cardName){
+        if (Objects.equals(cardName, "Duke")){
+            ImageView imageView = new ImageView(Duke1);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            return imageView;
+        }
+        else if (Objects.equals(cardName, "Assassin")){
+            ImageView imageView = new ImageView(Assassin1);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            return imageView;
+        }
+        else if (Objects.equals(cardName, "Countess")){
+            ImageView imageView = new ImageView(Countess1);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            return imageView;
+        }
+        else if (Objects.equals(cardName, "Captain")){
+            ImageView imageView = new ImageView(Captain1);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            return imageView;
+        }
+        else {
+            ImageView imageView = new ImageView(Ambassador1);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            return imageView;
+        }
+    }
+
+
+    public int numberOfEachCardInDesk(ArrayList<String> desk,String cardName){
+        eachCardNumber = 0;
+        for (String element:desk){
+            if(Objects.equals(element, cardName)) eachCardNumber += 1;
+        }
+        return eachCardNumber;
+    }
+    public String getUserCardsFromFile(Player player, int i){
+        try {
+
+            //Read JSON file
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\example\\coup\\database\\" + player.getName() + ".json"));
+            JSONObject deskCards = (JSONObject) obj;
+
+
+            return ((ArrayList<String>) deskCards.get("Cards")).get(i);
+
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public int getUserCoinFromFile(Player player){
+        try {
+
+            //Read JSON file
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\example\\coup\\database\\" + player.getName() + ".json"));
+            JSONObject deskCards = (JSONObject) obj;
+
+
+            return (int) deskCards.get("Coin");
+
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public String getUserBotNumberFile(Player player){
+        try {
+
+            //Read JSON file
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\example\\coup\\database\\" + player.getName() + ".json"));
+            JSONObject deskCards = (JSONObject) obj;
+
+
+            return (String) deskCards.get("BotNumber");
+
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
